@@ -1,22 +1,50 @@
 const mario = document.querySelector(".mario");
 const cano = document.querySelector(".cano");
 const nuvem = document.querySelector(".nuvem");
-const audionormal = document.querySelector('.audionormal')
+const audionormal = document.querySelector(".audionormal");
+const audiorip = document.querySelector(".audiorip");
+const tempo= document.querySelector('.tempo');
 
 audionormal.play();
+audionormal.volume = 0.6 ;
+const jumpSound = new Audio("./audio/mariopulosom.wav");
+ 
 
+const startTimer = () => {
+  let gameRunning = true;
+  this.loop = setInterval(() => {
+    const currentTime = +tempo.innerHTML;
+    tempo.innerHTML = currentTime + 1;
+  }, 1000);
+}
+
+const stopGame = () => {
+  gameRunning = false;
+  clearInterval(this.loop);
+};
+
+startTimer();
+
+let jumping = false;
+ 
 const jump = () => {
-  mario.classList.add("pulo");
-  setTimeout(() => {
-    mario.classList.remove("pulo");
-  }, 500);
+  if (!jumping) {
+    jumping = true;
+    mario.classList.add("pulo");
+    setTimeout(() => {
+      mario.classList.remove("pulo");
+      jumping = false;
+    }, 500);
+    jumpSound.play();
+  }
 };
 
 const loop = setInterval(() => {
-  const audiorip = document.querySelector('.audiorip')
   const positioncano = cano.offsetLeft;
   const positionnuvem = nuvem.offsetLeft;
-  const positionmario = +window.getComputedStyle(mario).bottom.replace('px', '');
+  const positionmario = +window
+    .getComputedStyle(mario)
+    .bottom.replace("px", "");
 
   if (positioncano <= 120 && positionmario < 80 && positioncano > 0) {
     cano.style.animation = "none";
@@ -33,10 +61,21 @@ const loop = setInterval(() => {
     nuvem.style.left = `${positionnuvem}px`;
 
     audiorip.play();
+    audiorip.volume = 0.7;
     audionormal.pause();
 
     clearInterval(loop);
+
+    stopGame();
   }
 }, 10);
 
-document.addEventListener("click", jump);
+document.addEventListener("keydown", (event) => {
+  if (event.key === " ") {
+    jump();
+  }
+});
+
+document.addEventListener("touchstart", () => {
+  jump();
+});
