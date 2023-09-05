@@ -14,7 +14,7 @@ Se o Mario colidir com o cano, a animação é interrompida e a música é alter
 
 Melhorar responsividade
 
-Dependendo o dispositivo o site pode bugar e ficar muito feio
+Fazer funcionar no celular
 
 Adicionar contagem de tempo
 
