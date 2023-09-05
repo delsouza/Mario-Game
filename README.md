@@ -20,4 +20,4 @@ Adicionar contagem de tempo
 
 Aumentar a velocidade do Mario com o tempo
 
-Adicionar audiozinho quando o Mario pular o cano
+Adicionar audio quando o Mario pular o cano
